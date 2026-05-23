@@ -1,20 +1,31 @@
 import json
 from pathlib import Path
+from typing import Any
 
 
-def save_json(data: dict | list, path: str | Path) -> None:
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
+def ensure_dir(path: str | Path) -> None:
+    """
+    Create directory if it does not exist.
+    """
+    Path(path).mkdir(parents=True, exist_ok=True)
 
-    with open(path, "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+
+def save_json(data: Any, output_path: str | Path) -> None:
+    """
+    Save Python object as pretty JSON.
+    """
+    output_path = Path(output_path)
+    ensure_dir(output_path.parent)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
-def load_json(path: str | Path) -> dict | list:
-    path = Path(path)
+def load_json(input_path: str | Path) -> Any:
+    """
+    Load JSON file.
+    """
+    input_path = Path(input_path)
 
-    if not path.exists():
-        raise FileNotFoundError(f"File not found: {path}")
-
-    with open(path, "r", encoding="utf-8") as file:
-        return json.load(file)
+    with open(input_path, "r", encoding="utf-8") as f:
+        return json.load(f)

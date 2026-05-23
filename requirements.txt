@@ -15,3 +15,7 @@ sentence-transformers
 rouge-score
 matplotlib
 seaborn
+pymupdf
+pdfplumber
+unstructured
+langchain-text-splitters
