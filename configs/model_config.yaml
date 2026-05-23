@@ -1,0 +1,4 @@
+base_model: "gpt-4o-mini"
+fine_tuned_model: null
+temperature: 0.2
+max_tokens: 1000

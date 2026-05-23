@@ -1,0 +1,17 @@
+python-dotenv
+pydantic
+loguru
+pyyaml
+jupyter
+notebook
+ipykernel
+pandas
+numpy
+tqdm
+pypdf
+openai
+weaviate-client
+sentence-transformers
+rouge-score
+matplotlib
+seaborn

@@ -1,0 +1,5 @@
+chunk_size: 800
+chunk_overlap: 150
+embedding_model: "text-embedding-3-small"
+top_k: 5
+rerank_top_k: 3

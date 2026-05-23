@@ -1,0 +1,8 @@
+metrics:
+  - rouge
+  - judge_score
+  - latency
+  - cost
+
+golden_test_set_path: "data/processed/golden_test_set.jsonl"
+results_output_path: "artifacts/eval_results/results.json"

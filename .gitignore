@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files
+data/raw/*
+data/processed/*
+
+# Artifacts
+artifacts/lora_adapters/*
+artifacts/eval_results/*
+artifacts/reports/*
+
+# Keep folder structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!artifacts/lora_adapters/.gitkeep
+!artifacts/eval_results/.gitkeep
+!artifacts/reports/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
