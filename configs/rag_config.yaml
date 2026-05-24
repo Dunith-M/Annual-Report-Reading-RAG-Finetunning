@@ -3,3 +3,30 @@ chunk_overlap: 150
 embedding_model: "text-embedding-3-small"
 top_k: 5
 rerank_top_k: 3
+
+rag:
+  collection_name: "UberAnnualReportChunks"
+
+  paths:
+    chunks_path: "data/processed/chunks.json"
+
+  embedding:
+    model_name: "BAAI/bge-small-en-v1.5"
+    batch_size: 32
+    normalize_embeddings: true
+
+  retrieval:
+    dense_top_k: 20
+    bm25_top_k: 20
+    rrf_k: 60
+    fused_top_k: 20
+
+  reranking:
+    model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    top_k: 5
+
+  generation:
+    provider: "openai"
+    model: "gpt-4o-mini"
+    temperature: 0.0
+    max_context_chars: 6000
