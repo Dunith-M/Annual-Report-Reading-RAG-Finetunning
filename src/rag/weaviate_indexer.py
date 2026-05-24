@@ -1,14 +1,21 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import List, Dict, Any
 
 import weaviate
+from dotenv import load_dotenv
 from weaviate.classes.config import Configure, Property, DataType
+from weaviate.classes.init import Auth
 from tqdm import tqdm
 
 from src.rag.embedder import BGEEmbedder
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(PROJECT_ROOT / ".env")
 
 
 class WeaviateIndexer:
@@ -27,7 +34,18 @@ class WeaviateIndexer:
         self.collection_name = collection_name
         self.embedder = embedder
         self.chunks_path = Path(chunks_path)
-        self.client = weaviate.connect_to_embedded()
+        if not self.chunks_path.is_absolute():
+            self.chunks_path = PROJECT_ROOT / self.chunks_path
+
+        weaviate_url = os.getenv("WEAVIATE_URL")
+        weaviate_api_key = os.getenv("WEAVIATE_API_KEY")
+        if not weaviate_url or not weaviate_api_key:
+            raise ValueError("WEAVIATE_URL and WEAVIATE_API_KEY must be set in your environment.")
+
+        self.client = weaviate.connect_to_weaviate_cloud(
+            cluster_url=weaviate_url,
+            auth_credentials=Auth.api_key(weaviate_api_key),
+        )
 
     def close(self) -> None:
         self.client.close()
