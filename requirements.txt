@@ -19,3 +19,4 @@ pymupdf
 pdfplumber
 unstructured
 langchain-text-splitters
+jsonlines

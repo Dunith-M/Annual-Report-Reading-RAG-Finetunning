@@ -1,1 +1,4 @@
 2026-05-23 22:56:55.518 | INFO     | __main__:<module>:5 - Total pages loaded: 142
+2026-05-23 23:03:03.501 | INFO     | __main__:<module>:5 - Total pages cleaned: 142
+2026-05-23 23:03:58.076 | INFO     | __main__:<module>:9 - Total chunks created: 522
+2026-05-23 23:05:46.645 | INFO     | __main__:<module>:3 - Chunks saved to: c:\Users\Dunith Munasinghe\Desktop\ledger-mind\Annual-Report-Reading-RAG-Finetunning\data\processed\chunks.json
