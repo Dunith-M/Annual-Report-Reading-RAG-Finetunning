@@ -30,4 +30,5 @@ trl
 tensorboard
 weaviate-client>=4.9.0
 rank-bm25
+streamlit
 
