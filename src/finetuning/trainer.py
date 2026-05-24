@@ -2,6 +2,7 @@ import os
 import yaml
 import torch
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 from transformers import (
     AutoModelForCausalLM,
@@ -10,6 +11,23 @@ from transformers import (
 )
 
 from peft import LoraConfig, prepare_model_for_kbit_training
+
+# TRL 1.4 reads bundled chat-template files without specifying an encoding.
+# On Windows, Python may default to cp1252 and fail on UTF-8 template files.
+_path_read_text = Path.read_text
+
+
+def _read_text_utf8_by_default(self, encoding=None, errors=None, newline=None):
+    return _path_read_text(
+        self,
+        encoding=encoding or "utf-8",
+        errors=errors,
+        newline=newline
+    )
+
+
+Path.read_text = _read_text_utf8_by_default
+
 from trl import SFTTrainer, SFTConfig
 
 from src.finetuning.dataset_builder import build_sft_dataset
@@ -115,7 +133,7 @@ def train_intern(config_path: str = "configs/model_config.yaml") -> None:
         output_dir=output_dir,
         logging_dir=logging_dir,
 
-        max_seq_length=config["max_seq_length"],
+        max_length=config["max_seq_length"],
         dataset_text_field="text",
 
         num_train_epochs=config["num_train_epochs"],
