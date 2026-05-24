@@ -20,3 +20,11 @@ pdfplumber
 unstructured
 langchain-text-splitters
 jsonlines
+torch
+transformers
+datasets
+accelerate
+bitsandbytes
+peft
+trl
+tensorboard

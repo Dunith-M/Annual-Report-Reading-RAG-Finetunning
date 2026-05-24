@@ -2,3 +2,42 @@ base_model: "gpt-4o-mini"
 fine_tuned_model: null
 temperature: 0.2
 max_tokens: 1000
+
+
+fine_tuning:
+  base_model_id: "mistralai/Mistral-7B-Instruct-v0.2"
+
+  train_file: "data/processed/train.jsonl"
+  output_dir: "artifacts/lora_adapters"
+  logging_dir: "artifacts/reports/tensorboard_logs"
+
+  max_seq_length: 1024
+
+  num_train_epochs: 1
+  max_steps: 100
+
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+
+  learning_rate: 0.0002
+  warmup_steps: 10
+  weight_decay: 0.01
+  lr_scheduler_type: "cosine"
+
+  save_steps: 50
+  logging_steps: 5
+
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules:
+      - q_proj
+      - k_proj
+      - v_proj
+      - o_proj
+
+  quantization:
+    load_in_4bit: true
+    bnb_4bit_quant_type: "nf4"
+    bnb_4bit_use_double_quant: true
